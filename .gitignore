@@ -44,3 +44,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+package/authentication_repository/.gitignore
+package/authentication_repository/.metadata
+package/authentication_repository/CHANGELOG.md
+package/authentication_repository/pubspec.lock
+package/authentication_repository/README.md
