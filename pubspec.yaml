@@ -11,7 +11,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  authentication_repository:
+      path: package/authentication_repository
   cupertino_icons: ^1.0.2
+  flutter_svg: ^0.22.0
+  flutter_bloc: ^7.2.0
+  rxdart: ^0.27.2
+  equatable: ^2.0.3
 
 dev_dependencies:
   flutter_test:
@@ -19,3 +25,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - asset/svg/twitter.svg
+    - asset/svg/google.svg
