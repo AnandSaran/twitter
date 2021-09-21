@@ -34,7 +34,6 @@ class AuthenticationRepository {
   ///
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
   Future<void> logInWithGoogle() async {
-    try {
       late final firebase_auth.AuthCredential credential;
       final googleUser = await _googleSignIn.signIn();
       final googleAuth = await googleUser!.authentication;
@@ -44,9 +43,6 @@ class AuthenticationRepository {
       );
 
       await _firebaseAuth.signInWithCredential(credential);
-    } catch (_) {
-      throw LogInWithGoogleFailure();
-    }
   }
 
   /// Signs out the current user which will emit

@@ -1,39 +1,38 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:twitter/bloc/login/login_bloc.dart';
+import 'package:twitter/screen/screens.dart';
 
-void main() {
+import 'constants/constant.dart';
+
+void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Twitter',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Twitter'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Container(),
-    );
+        title: APP_NAME,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: ROUTE_SPLASH,
+        routes: {
+          ROUTE_SPLASH: (context) => SplashScreen(),
+          ROUTE_LOADING: (context) => BlocProvider<LoginBLoc>(
+              create: (context) {
+                return LoginBLoc(
+                    authenticationRepository: AuthenticationRepository());
+              },
+              child: LoadingScreen(
+                  authenticationRepository: AuthenticationRepository())),
+        });
   }
 }
