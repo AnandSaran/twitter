@@ -12,7 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
   authentication_repository:
-      path: package/authentication_repository
+    path: package/authentication_repository
+  post_repository:
+    path: package/post_repository
   cupertino_icons: ^1.0.2
   flutter_svg: ^0.22.0
   flutter_bloc: ^7.2.0
