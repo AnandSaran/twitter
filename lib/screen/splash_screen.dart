@@ -1,7 +1,7 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:twitter/constants/constant.dart';
-import 'package:twitter/screen/widget.dart';
+import 'package:twitter/screen/widget/widget.dart';
 import 'package:twitter/util/navigation.dart';
 
 class SplashScreen extends StatefulWidget {
