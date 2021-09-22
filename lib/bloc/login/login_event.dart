@@ -1,4 +1,3 @@
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:equatable/equatable.dart';
 
 class LoginEvent extends Equatable {
@@ -9,7 +8,10 @@ class LoginEvent extends Equatable {
 }
 
 class ListenLoginUser extends LoginEvent {}
+
 class GoogleSignIn extends LoginEvent {}
+
+class SignOut extends LoginEvent {}
 
 /*class GoogleSignInSuccess extends LoginEvent {
   final User user;

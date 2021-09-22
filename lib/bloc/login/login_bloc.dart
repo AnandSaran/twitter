@@ -17,6 +17,8 @@ class LoginBLoc extends Bloc<LoginEvent, LoginState> {
       _mapListenLoginUser();
     } else if (event is GoogleSignIn) {
       _mapGoogleSignInSuccessToState();
+    } else if (event is SignOut) {
+      _mapSignOutSuccessToState();
     }
     /*else if (event is GoogleSignInSuccess) {
       yield* _mapGoogleSignInSuccessToState();
@@ -27,6 +29,10 @@ class LoginBLoc extends Bloc<LoginEvent, LoginState> {
 
   _mapGoogleSignInSuccessToState() {
     _authenticationRepository.logInWithGoogle();
+  }
+
+  _mapSignOutSuccessToState() {
+    _authenticationRepository.logOut();
   }
 
   _mapListenLoginUser() async* {

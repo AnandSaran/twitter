@@ -29,23 +29,27 @@ class _MyAppState extends State<MyApp> {
         initialRoute: ROUTE_SPLASH,
         routes: {
           ROUTE_SPLASH: (context) => SplashScreen(),
-          ROUTE_LOADING: (context) => MultiBlocProvider(
-                  providers: [
-                    BlocProvider<LoginBLoc>(
-                      create: (context) {
-                        return LoginBLoc(
-                            authenticationRepository:
-                                AuthenticationRepository());
-                      },
-                    ),
-                    BlocProvider<PostBloc>(
-                      create: (BuildContext context) =>
-                          PostBloc(postRepository: FirestorePostRepository())
-                            ..add((LoadPosts())),
-                    )
-                  ],
-                  child: LoadingScreen(
-                      authenticationRepository: AuthenticationRepository())),
+          ROUTE_LOADING: (context) => generateLoadingScreenBlocProvider(),
+          ROUTE_CREATE_POST: (context) => CreatePostScreen()
         });
+  }
+
+  MultiBlocProvider generateLoadingScreenBlocProvider() {
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<LoginBLoc>(
+            create: (context) {
+              return LoginBLoc(
+                  authenticationRepository: AuthenticationRepository());
+            },
+          ),
+          BlocProvider<PostBloc>(
+            create: (BuildContext context) =>
+                PostBloc(postRepository: FirestorePostRepository())
+                  ..add((LoadPosts())),
+          )
+        ],
+        child: LoadingScreen(
+            authenticationRepository: AuthenticationRepository()));
   }
 }

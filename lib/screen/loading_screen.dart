@@ -1,7 +1,7 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:twitter/screen/post_screen.dart';
 import 'package:twitter/screen/login_screen.dart';
+import 'package:twitter/screen/post_screen.dart';
 import 'package:twitter/screen/widget/widget.dart';
 
 class LoadingScreen extends StatefulWidget {
@@ -29,10 +29,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
     return StreamBuilder(
         stream: widget.authenticationRepository.user,
         builder: (context, AsyncSnapshot<User> snapshot) {
-          if (!snapshot.hasData) {
+          bool hasData = snapshot.hasData;
+          User user = snapshot.data == null ? User.empty : snapshot.data!;
+          if (!hasData) {
             return _widgetLoading();
-          } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-            return PostScreen();
+          } else if (snapshot.hasData && user.isNotEmpty) {
+            return PostScreen(user);
           } else {
             return LoginScreen();
           }

@@ -1,21 +1,45 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:twitter/bloc/login/login_bloc.dart';
+import 'package:twitter/bloc/login/login_event.dart';
 import 'package:twitter/bloc/post/post_bloc.dart';
 import 'package:twitter/bloc/post/post_state.dart';
 import 'package:twitter/constants/constant.dart';
 import 'package:twitter/screen/widget/post_list_view.dart';
+import 'package:twitter/style/theme.dart' as Theme;
+import 'package:twitter/util/navigation.dart';
 
 import 'widget/loading_indicator.dart';
 
 class PostScreen extends StatelessWidget {
-  const PostScreen({Key? key}) : super(key: key);
+  final User user;
+
+  const PostScreen(this.user, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text(APP_NAME),
+          backgroundColor: Theme.AppColors.toolBarBackgroundColor,
+          actions: <Widget>[
+            Builder(
+              builder: (context) => IconButton(
+                icon: Icon(
+                  Icons.logout,
+                  color: Theme.AppColors.toolbarIconColor,
+                ),
+                onPressed: () {
+                  _logOut(context);
+                },
+              ),
+            )
+          ],
+        ),
         backgroundColor: Colors.white,
-        floatingActionButton: _widgetFab(),
+        floatingActionButton: _widgetFab(context),
         body: _blocBuilderPosts());
   }
 
@@ -31,14 +55,22 @@ class PostScreen extends StatelessWidget {
     });
   }
 
-  FloatingActionButton _widgetFab() {
+  FloatingActionButton _widgetFab(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
-        // Add your onPressed code here!
+        showCreatePostScreen(context);
       },
       child: SvgPicture.asset(ICON_QUILL,
           width: 28, height: 28, color: Colors.white),
       backgroundColor: Colors.blue,
     );
+  }
+
+  void _logOut(BuildContext context) {
+    context.read<LoginBLoc>().add(SignOut());
+  }
+
+  void showCreatePostScreen(BuildContext context) {
+    Navigation().pushPageWithArgument(context, ROUTE_CREATE_POST, user);
   }
 }
