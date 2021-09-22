@@ -1,0 +1,16 @@
+name: post_repository
+description: A post repository
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  firebase_core: ^1.6.0
+  cloud_firestore: ^2.5.3
+  rxdart: ^0.27.1
+  equatable: ^2.0.0
