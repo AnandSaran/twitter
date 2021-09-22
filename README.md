@@ -3,5 +3,5 @@
 A twitter clone project.
 
 <p align="center">
-  <video src="Screenrecording_20210922_235152.mp4" width="256" height="455">
+  <video src="https://drive.google.com/file/d/1gNaRpLHBvOxXiY6eIlgDRKG1HufMKvuF/view?usp=sharing" width="256" height="455">
 </p>
