@@ -6,19 +6,15 @@ class Post extends Equatable {
   final String id;
   final String username;
   final String userAvatar;
+  final String userId;
   final String postContent;
-  final String comments;
-  final String retweets;
-  final String favorites;
 
   const Post({
     id,
     required this.username,
     required this.userAvatar,
+    required this.userId,
     required this.postContent,
-    required this.comments,
-    required this.retweets,
-    required this.favorites,
   }) : this.id = id ?? EMPTY_STRING;
 
   Map<String, Object?> toJson() {
@@ -26,20 +22,23 @@ class Post extends Equatable {
       'id': id,
       'username': username,
       'userAvatar': userAvatar,
+      'userId': userId,
       'postContent': postContent,
-      'comments': comments,
-      'retweets': retweets,
-      'favorites': favorites,
     };
   }
 
   @override
-  List<Object?> get props =>
-      [id, username, userAvatar, postContent, comments, retweets, favorites];
+  List<Object?> get props => [
+        id,
+        username,
+        userAvatar,
+        userId,
+        postContent,
+      ];
 
   @override
   String toString() {
-    return 'Post { id: $id, username: $username, userAvatar: $userAvatar, postContent: $postContent, comments: $comments, retweets: $favorites}';
+    return 'Post { id: $id, username: $username, userAvatar: $userAvatar, userId: $userId, postContent: $postContent}';
   }
 
   static Post fromJson(Map<String, Object> json) {
@@ -47,10 +46,8 @@ class Post extends Equatable {
         id: json['id'] as String,
         username: json['username'] as String,
         userAvatar: json['userAvatar'] as String,
-        postContent: json['postContent'] as String,
-        comments: json['comments'] as String,
-        retweets: json['retweets'] as String,
-        favorites: json['favorites'] as String);
+        userId: json['userId'] as String,
+        postContent: json['postContent'] as String);
   }
 
   static Post fromSnapshot(DocumentSnapshot snap) {
@@ -60,10 +57,8 @@ class Post extends Equatable {
       id: snap.id,
       username: snap.get('username'),
       userAvatar: snap.get('userAvatar'),
+      userId: snap.get('userId'),
       postContent: snap.get('postContent'),
-      comments: snap.get('comments'),
-      retweets: snap.get('retweets'),
-      favorites: snap.get('favorites'),
     );
   }
 
@@ -71,10 +66,8 @@ class Post extends Equatable {
     return {
       'username': username,
       'userAvatar': userAvatar,
+      'userId': userId,
       'postContent': postContent,
-      'comments': comments,
-      'retweets': retweets,
-      'favorites': favorites,
       'date': Timestamp.now(),
     };
   }

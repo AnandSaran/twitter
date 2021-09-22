@@ -7,6 +7,7 @@ import 'package:twitter/bloc/login/login_event.dart';
 import 'package:twitter/bloc/post/post_bloc.dart';
 import 'package:twitter/bloc/post/post_state.dart';
 import 'package:twitter/constants/constant.dart';
+import 'package:twitter/model/data_model/cretae_post_dtata_model.dart';
 import 'package:twitter/screen/widget/post_list_view.dart';
 import 'package:twitter/style/theme.dart' as Theme;
 import 'package:twitter/util/navigation.dart';
@@ -71,6 +72,7 @@ class PostScreen extends StatelessWidget {
   }
 
   void showCreatePostScreen(BuildContext context) {
-    Navigation().pushPageWithArgument(context, ROUTE_CREATE_POST, user);
+    Navigation().pushPageWithArgument(
+        context, ROUTE_CREATE_POST, CreatePostDataModel(user: user));
   }
 }

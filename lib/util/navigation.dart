@@ -58,10 +58,6 @@ class Navigation {
 
   dynamic pushPageResult(BuildContext context, String route) async {
     return await Navigator.of(context).pushNamed(route);
-    /*Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => screenName),
-    );*/
   }
 
   void showToast(BuildContext context, String message) {

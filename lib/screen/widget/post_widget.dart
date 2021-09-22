@@ -7,6 +7,7 @@ import 'package:twitter/bloc/post/post_bloc.dart';
 import 'package:twitter/bloc/post/post_event.dart';
 import 'package:twitter/constants/constant.dart';
 import 'package:twitter/screen/widget/widget.dart';
+import 'package:twitter/util/number_util.dart';
 
 class PostWidget extends StatelessWidget {
   final Post post;
@@ -86,9 +87,12 @@ class PostWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          postIconButton(ICON_COMMENT, text: post.comments),
-          postIconButton(ICON_RETWEET, text: post.retweets),
-          postIconButton(ICON_HEART, text: post.favorites),
+          postIconButton(ICON_COMMENT,
+              text: NumberUtil().generateRandomNumber().toString()),
+          postIconButton(ICON_RETWEET,
+              text: NumberUtil().generateRandomNumber().toString()),
+          postIconButton(ICON_HEART,
+              text: NumberUtil().generateRandomNumber().toString()),
           postIconButton(ICON_SHARE),
           InkWell(
             onTap: () {
@@ -105,14 +109,14 @@ class PostWidget extends StatelessWidget {
     return Row(
       children: [
         SvgPicture.asset(icon,
-            width: 18.0, height: 18.0, color: Colors.black45),
+            width: 18.0, height: 18.0, color: Colors.black54),
         dividerSpace(width: 4),
         Visibility(
           child: Container(
             child: Text(
               text,
               style: TextStyle(
-                color: Colors.black45,
+                color: Colors.black54,
                 fontSize: 14.0,
               ),
             ),

@@ -30,7 +30,12 @@ class _MyAppState extends State<MyApp> {
         routes: {
           ROUTE_SPLASH: (context) => SplashScreen(),
           ROUTE_LOADING: (context) => generateLoadingScreenBlocProvider(),
-          ROUTE_CREATE_POST: (context) => CreatePostScreen()
+          ROUTE_CREATE_POST: (context) => BlocProvider<PostBloc>(
+                create: (BuildContext context) =>
+                    PostBloc(postRepository: FirestorePostRepository())
+                      ..add((LoadPosts())),
+                child: CreatePostScreen(),
+              ),
         });
   }
 
