@@ -7,6 +7,7 @@ const String NO = "NO";
 //title
 const String TITLE_DELETE = "Delete";
 const String TITLE_CREATE_POST = "Create Post";
+const String TITLE_EDIT_POST = "Edit Post";
 
 //message
 const String MESSAGE_DELETE = "Are you sure you want to delete this post?";

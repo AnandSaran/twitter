@@ -11,8 +11,15 @@ import 'package:twitter/util/number_util.dart';
 
 class PostWidget extends StatelessWidget {
   final Post post;
+  final bool isSameUserPost;
+  final Function(Post) onTapPostEdit;
 
-  const PostWidget({Key? key, required this.post}) : super(key: key);
+  const PostWidget({
+    Key? key,
+    required this.post,
+    required this.isSameUserPost,
+    required this.onTapPostEdit,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -93,12 +100,23 @@ class PostWidget extends StatelessWidget {
               text: NumberUtil().generateRandomNumber().toString()),
           postIconButton(ICON_HEART,
               text: NumberUtil().generateRandomNumber().toString()),
-          postIconButton(ICON_SHARE),
-          InkWell(
-            onTap: () {
-              showDeleteDialog(context);
-            },
-            child: postIconButton(ICON_DELETE),
+          Visibility(
+            visible: isSameUserPost,
+            child: InkWell(
+              onTap: () {
+                onTapPostEdit(post);
+              },
+              child: postIconButton(ICON_EDIT),
+            ),
+          ),
+          Visibility(
+            visible: isSameUserPost,
+            child: InkWell(
+              onTap: () {
+                showDeleteDialog(context);
+              },
+              child: postIconButton(ICON_DELETE),
+            ),
           ),
         ],
       ),

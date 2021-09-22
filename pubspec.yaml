@@ -36,3 +36,4 @@ flutter:
     - asset/svg/retweet.svg
     - asset/svg/share.svg
     - asset/svg/quill.svg
+    - asset/svg/edit.svg

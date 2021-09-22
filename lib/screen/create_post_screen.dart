@@ -19,19 +19,24 @@ class CreatePostScreen extends StatefulWidget {
 class _CreatePostScreenState extends State<CreatePostScreen> {
   final TextEditingController _tecContent = TextEditingController();
   late CreatePostDataModel createPostDataModel;
+  String _title = TITLE_CREATE_POST;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     createPostDataModel =
         ModalRoute.of(context)!.settings.arguments as CreatePostDataModel;
+    if (createPostDataModel.isEdit) {
+      _title = TITLE_EDIT_POST;
+      _tecContent.text = createPostDataModel.post.postContent;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(TITLE_CREATE_POST),
+          title: Text(_title),
           backgroundColor: Theme.AppColors.toolBarBackgroundColor,
         ),
         body: _body(context));
@@ -84,6 +89,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   void _onTapSubmit(BuildContext context) {
     bool isValidContent = validateContent(context);
     if (isValidContent) {
+      submitPost(context);
+    }
+  }
+
+  void submitPost(BuildContext context) {
+    if (createPostDataModel.isEdit) {
+      updatePost(context);
+    } else {
       addPost(context);
     }
   }
@@ -107,9 +120,16 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     Navigation().pop(context);
   }
 
+  void updatePost(BuildContext context) {
+    Post post = generatePost();
+    BlocProvider.of<PostBloc>(context).add(UpdatePost(post));
+    Navigation().pop(context);
+  }
+
   Post generatePost() {
     User user = createPostDataModel.user;
     Post post = Post(
+      id: createPostDataModel.post.id,
       username: user.name.toString(),
       userAvatar: user.photo.toString(),
       userId: user.id,

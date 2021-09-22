@@ -2,6 +2,7 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:post_repository/post_repository.dart';
 import 'package:twitter/bloc/login/login_bloc.dart';
 import 'package:twitter/bloc/login/login_event.dart';
 import 'package:twitter/bloc/post/post_bloc.dart';
@@ -41,15 +42,21 @@ class PostScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
         floatingActionButton: _widgetFab(context),
-        body: _blocBuilderPosts());
+        body: _blocBuilderPosts(context));
   }
 
-  _blocBuilderPosts() {
+  _blocBuilderPosts(BuildContext buildContext) {
     return BlocBuilder<PostBloc, PostState>(builder: (context, state) {
       if (state is PostLoading) {
         return LoadingIndicator();
       } else if (state is PostLoaded) {
-        return PostListView(posts: state.posts);
+        return PostListView(
+          posts: state.posts,
+          userId: user.id,
+          onTapPostEdit: (post) {
+            onTapEditPost(buildContext, post);
+          },
+        );
       } else {
         return Container();
       }
@@ -74,5 +81,10 @@ class PostScreen extends StatelessWidget {
   void showCreatePostScreen(BuildContext context) {
     Navigation().pushPageWithArgument(
         context, ROUTE_CREATE_POST, CreatePostDataModel(user: user));
+  }
+
+  onTapEditPost(BuildContext context, Post post) {
+    Navigation().pushPageWithArgument(context, ROUTE_CREATE_POST,
+        CreatePostDataModel(user: user, post: post, isEdit: true));
   }
 }

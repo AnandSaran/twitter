@@ -6,3 +6,4 @@ const String ICON_HEART = "asset/svg/heart.svg";
 const String ICON_RETWEET = "asset/svg/retweet.svg";
 const String ICON_SHARE = "asset/svg/share.svg";
 const String ICON_QUILL = "asset/svg/quill.svg";
+const String ICON_EDIT = "asset/svg/edit.svg";
