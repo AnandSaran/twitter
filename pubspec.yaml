@@ -30,3 +30,9 @@ flutter:
   assets:
     - asset/svg/twitter.svg
     - asset/svg/google.svg
+    - asset/svg/comment.svg
+    - asset/svg/delete.svg
+    - asset/svg/heart.svg
+    - asset/svg/retweet.svg
+    - asset/svg/share.svg
+    - asset/svg/quill.svg

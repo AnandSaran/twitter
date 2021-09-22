@@ -10,4 +10,3 @@ Widget widgetLogo() {
   return SvgPicture.asset(ICON_TWITTER,
       width: 72, height: 72, color: Colors.white);
 }
-

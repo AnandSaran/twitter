@@ -5,7 +5,7 @@ import 'package:twitter/bloc/login/login_bloc.dart';
 import 'package:twitter/bloc/login/login_event.dart';
 import 'package:twitter/bloc/login/login_state.dart';
 import 'package:twitter/constants/constant.dart';
-import 'package:twitter/screen/widget.dart';
+import 'package:twitter/screen/widget/widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);

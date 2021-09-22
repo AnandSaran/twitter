@@ -1,10 +1,8 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:twitter/constants/constant.dart';
-import 'package:twitter/screen/home_screen.dart';
+import 'package:twitter/screen/post_screen.dart';
 import 'package:twitter/screen/login_screen.dart';
-import 'package:twitter/screen/widget.dart';
-import 'package:twitter/util/navigation.dart';
+import 'package:twitter/screen/widget/widget.dart';
 
 class LoadingScreen extends StatefulWidget {
   final AuthenticationRepository authenticationRepository;
@@ -34,7 +32,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
           if (!snapshot.hasData) {
             return _widgetLoading();
           } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-            return HomeScreen();
+            return PostScreen();
           } else {
             return LoginScreen();
           }
@@ -54,13 +52,5 @@ class _LoadingScreenState extends State<LoadingScreen> {
                 //your widgets here...
               ],
             ))));
-  }
-
-  void showHomeScreen(BuildContext context) {
-    Navigation().pushPage(context, ROUTE_HOME, isUntil: true);
-  }
-
-  void showLoginScreen(BuildContext context) {
-    Navigation().pushPage(context, ROUTE_LOGIN, isUntil: true);
   }
 }
